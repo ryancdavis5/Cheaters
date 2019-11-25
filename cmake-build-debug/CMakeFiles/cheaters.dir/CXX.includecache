@@ -7,6 +7,18 @@
 #IncludeRegexTransform: 
 
 C:/Users/ryan7/CLionProjects/cheaters/main.cpp
+sys/types.h
+-
+dirent.h
+-
+errno.h
+-
+vector
+-
 iostream
+-
+fstream
+-
+string
 -
 
