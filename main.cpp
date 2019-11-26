@@ -23,46 +23,64 @@ int getdir (string dir, vector<string> &files){
     closedir(dp);
     return 0;
 }
+void printV(vector<string> v){
+    for(int i = 0; i < v.size(); i++){
+        cout << v[i];
+        cout << endl;
+    }
+}
 void printQ(queue<string> myqueue){
     while (!myqueue.empty()) {
-        cout << ' ' << myqueue.front();
+        cout << myqueue.front();
         myqueue.pop();
     }
 }
 
-void printSequences(string &filePath, int length){
+//THIS FUNCTION IS CAUSING SOME PROBLEMS
+void putQueueInToVec(queue<string> q, vector<string> &v){
+    string wordSeq = "";
+    for(int i = 0; i<q.size(); i++){
+        wordSeq+= q.front();
+        wordSeq+= " ";
+        q.pop();
+    }
+    v.push_back(wordSeq);
+}
+
+vector<string> returnSequences(string &filePath, int length){
+    vector<string> v;
     string word;
     ifstream myfile;
     myfile.open(filePath);
     queue<string> q;
     int wordCnt = 0;
     if(myfile.is_open()){
-        cout << "file open" << endl;
         char c;
         while(myfile.get(c)){
             if(c != ' '){
                 //ignore special charcters
-                if(c < 46 || c > 122){
-                    //ignoring special characters
-                }
-                else{
+                if((c > 64 && c < 91) || (c>96 && c<123)){
+                    c = toupper(c);
                     word+= c;
                 }
             }
             else if( c == ' '){
                 wordCnt++;
                 q.push(word);
-                if(wordCnt >=6){
+                if(wordCnt >=length){
                     printQ(q);
-                    q.pop();
                     cout << endl;
+                    //putQueueInToVec(q, v);
+                    q.pop();
                 }
                 word = "";
             }
         }
+        return v;
     }
     else{
-        cout << "file not open" << endl;
+        cout << "Error: file not open" << endl;
+        return v;
     }
 }
 
@@ -80,9 +98,10 @@ int main(int argc, char *argv[]) {
     ss << "sm_doc_set/" << files[2];
     string filePath;
     ss >> filePath;
+    cout << filePath;
     cout << endl;
-    printSequences(filePath, 6);
-
+    vector<string> v = returnSequences(filePath, 6);
+    //printV(v);
 
     return 0;
 }
