@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <queue>
+#include <sstream>
 #include "hashTable.h"
 
 hashNode *hashTable[100000];
