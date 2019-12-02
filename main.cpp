@@ -35,6 +35,7 @@ int main(int argc, char *argv[]) {
         cout << i <<": " << files[i] << endl;
     }
 
+    hashNode(0, "test", "test", hashTable);
     hashNode(0, "next1", "next1", hashTable);
     hashNode(0, "next2", "next2", hashTable);
 
