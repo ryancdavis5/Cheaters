@@ -5,6 +5,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "hashTable.h"
+
+hashNode *hashTable[100000];
 
 using namespace std;
 int getdir (string dir, vector<string> &files){
@@ -31,6 +34,21 @@ int main(int argc, char *argv[]) {
     for (unsigned int i = 0;i < files.size();i++) {
         cout << i <<": " << files[i] << endl;
     }
+
+    hashNode(0, "next1", "next1", hashTable);
+    hashNode(0, "next2", "next2", hashTable);
+
+
+    cout << hashTable[0]->getFileName() << endl;
+    cout << hashTable[0]->next->getFileName() << endl;
+    cout << hashTable[0]->next->next->getFileName() << endl;
+
+
+
+
+
+
+
 
     return 0;
 }

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
-project(cheaters)
+project(Cheaters)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
-add_executable(cheaters main.cpp)
+#include_directories(sm_doc_set)
+
+add_executable(Cheaters main.cpp hashTable.h hashTable.cpp)
