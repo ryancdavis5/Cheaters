@@ -25,12 +25,11 @@ hashNode::hashNode(int key, string filename, string entry, hashNode *hashTable[]
         hashNode *tempPtr = hashTable[key];
         hashTable[key] = this;
         hashTable[key]->next = tempPtr;
+    }else{
+        hashTable[key] = this;
+        this->next = NULL;
     }
 
-
-    hashTable[key] = this;
-
-    
 }
 
 void hashNode::setFile(string filename) {
