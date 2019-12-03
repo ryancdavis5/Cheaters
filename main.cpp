@@ -148,7 +148,7 @@ int main(int argc, char *argv[]) {
         for(int j = 0; j < chunks.size(); j++){
             hashString(chunks[j], filePath);
             long long testHash = hashValue(chunks[j]);
-            cout << chunks[j] << endl;
+            cout << hashTable[testHash]->hash << " this should be hash" << endl;
             cout << hashTable[testHash]->getFileName() << " this should be file" << endl;
         }
 
