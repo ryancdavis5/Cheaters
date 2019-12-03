@@ -113,7 +113,7 @@ long long hashValue(string sequence){
 void hashString(string sequence, string fileName){
     long long hashVal = hashValue(sequence);
 
-    hashNode(hashVal, fileName, hashTable);
+    hashNode *n = new hashNode(hashVal, fileName, hashTable);
 
 }
 
@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
     //printV(v);
     getDir(dir,files);
 
-    for (unsigned int i = 0;i < 3; i++) {
+    for (unsigned int i = 0;i < files.size(); i++) {
         stringstream sss;
         sss << "sm_doc_set/" << files[i];
         string filePaths;
@@ -147,9 +147,9 @@ int main(int argc, char *argv[]) {
 
         for(int j = 0; j < chunks.size(); j++){
             hashString(chunks[j], filePath);
-            long testHash = hashValue(chunks[j]);
+            long long testHash = hashValue(chunks[j]);
             cout << chunks[j] << endl;
-            cout << hashTable[testHash]->getHash() << " this should be equal to number above" << endl;
+            cout << hashTable[testHash]->getFileName() << " this should be file" << endl;
         }
 
 

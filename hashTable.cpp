@@ -3,6 +3,9 @@
 //
 #include "hashTable.h"
 #include <string>
+#include <iostream>
+
+using namespace std;
 
 
 
@@ -18,6 +21,8 @@ hashNode::hashNode(){
 
 hashNode::hashNode(long long key, string filename, hashNode *hashTable[]){
     hash = key;
+    //cout << hash << endl;
+
     fileName = filename;
     //this->nWordSequence = entry;
 

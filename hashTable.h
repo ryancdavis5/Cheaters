@@ -9,7 +9,7 @@ using namespace std;
 
 class hashNode{
 private:
-    long long hash;
+
     string fileName;
     //string nWordSequence;
 
@@ -17,6 +17,7 @@ private:
 
 
 public:
+    long long hash;
 
     hashNode *next;
 
