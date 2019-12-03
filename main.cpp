@@ -191,15 +191,13 @@ int main(int argc, char *argv[]) {
             if(hashTable[hashCheck]->next != NULL){
                 hashNode *tempPtr = hashTable[hashCheck]->next;
                 hashNode *prvPtr = hashTable[hashCheck];
-                int index1 = i;
                 int index2 = prvPtr->index;
-                collisionTable[index1][index2] += 1;
+                collisionTable[i][index2] += 1;
                 while(tempPtr->next != NULL){
                     prvPtr = tempPtr;
                     tempPtr = tempPtr->next;
-                    index1 = i;
                     index2 = prvPtr->index;
-                    collisionTable[index1][index2] += 1;
+                    collisionTable[i][index2] += 1;
 
                 }
 
@@ -214,10 +212,27 @@ int main(int argc, char *argv[]) {
 
     for(int i = 0; i < fileNames.size(); i++){
         for(int j = 0; j <fileNames.size(); j++){
-            cout << "i: " << i << " j: " << j << endl;
-            cout << collisionTable[i][j] << endl;
+            cout << collisionTable[i][j] << " ";
         }
+        cout << endl;
     }
+    vector <string> chunkTest = returnSequences(fileNames[0], length);
+    vector <string> chunkChecker = returnSequences(fileNames[11], length);
+    int bruteCounter = 0;
+
+    for (int i = 0; i < chunkTest.size(); ++i){
+        string testString = chunkTest[i];
+        for(int j = 0; j < chunkChecker.size(); j++){
+            string testAgainst = chunkChecker[j];
+            if(testAgainst == testString){
+                bruteCounter++;
+            }
+
+        }
+
+    }
+
+    cout << bruteCounter << endl;
 
 
 
