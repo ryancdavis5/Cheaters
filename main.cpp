@@ -133,9 +133,9 @@ int main(int argc, char *argv[]) {
     vector<string> v = returnSequences(filePath, 6);
     //printV(v);
 
-    hashNode(0, "test", "test", hashTable);
-    hashNode(0, "next1", "next1", hashTable);
-    hashNode(0, "next2", "next2", hashTable);
+    hashNode(0, "test", hashTable);
+    hashNode(0, "next1", hashTable);
+    hashNode(0, "next2", hashTable);
 
 
     cout << hashTable[0]->getFileName() << endl;
