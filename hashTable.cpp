@@ -9,17 +9,17 @@
 hashNode::hashNode(){
     hash = 0;
     fileName = "";
-    nWordSequence = "";
+    //nWordSequence = "";
     next = NULL;
 }
 
 
 
 
-hashNode::hashNode(int key, string filename, string entry, hashNode *hashTable[]){
+hashNode::hashNode(int key, string filename, hashNode *hashTable[]){
     this->hash = key;
     this->fileName = filename;
-    this->nWordSequence = entry;
+    //this->nWordSequence = entry;
 
     if(hashTable[key] != NULL){
         hashNode *tempPtr = hashTable[key];
@@ -40,18 +40,22 @@ void hashNode::setKey(int key) {
     hash = key;
 }
 
+/*
 void hashNode::setSequence(string sequence) {
     nWordSequence = sequence;
 }
+*/
 
 
 string hashNode::getFileName() {
     return hashNode::fileName;
 }
 
+/*
 string hashNode::getNWordSequence(){
     return hashNode::nWordSequence;
 }
+ */
 
 int hashNode::getHash() {
     return hashNode::hash;

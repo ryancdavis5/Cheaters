@@ -11,7 +11,7 @@ class hashNode{
 private:
     int hash;
     string fileName;
-    string nWordSequence;
+    //string nWordSequence;
 
 
 
@@ -23,15 +23,15 @@ public:
 
 
     hashNode();
-    hashNode(int hash, string fileName, string entry, hashNode *hashTable[]);
+    hashNode(int hash, string fileName, hashNode *hashTable[]);
     void setKey(int key);
     void setFile(string filename);
-    void setSequence(string sequence);
+    //void setSequence(string sequence);
 
 
     int getHash();
     string getFileName();
-    string getNWordSequence();
+    //string getNWordSequence();
 
     //void setNext(hashNode &sameKey);
 
