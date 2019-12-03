@@ -91,6 +91,11 @@ vector<string> returnSequences(string &filePath, int length){
     }
 }
 
+int hashValue(string sequence){
+    int hash = 0; //edit with hash value
+    return hash;
+}
+
 void hashString(string sequence, string fileName){
     //int hashVal = hashValue(sequence);
 
