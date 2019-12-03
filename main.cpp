@@ -44,16 +44,17 @@ void printQ(queue<string> myqueue){
     }
 }
 
-//THIS FUNCTION IS CAUSING SOME PROBLEMS
-void putQueueInToVec(queue<string> q, vector<string> &v){
-    string wordSeq = "";
-    for(int i = 0; i<q.size(); i++){
-        wordSeq+= q.front();
-        wordSeq+= " ";
-        q.pop();
+string qToString(queue<string> myqueue){
+    stringstream ss;
+    while (!myqueue.empty()) {
+        ss << myqueue.front();
+        myqueue.pop();
     }
-    v.push_back(wordSeq);
+    string retVal;
+    ss >> retVal;
+    return retVal;
 }
+
 
 vector<string> returnSequences(string &filePath, int length){
     vector<string> v;
@@ -76,9 +77,9 @@ vector<string> returnSequences(string &filePath, int length){
                 wordCnt++;
                 q.push(word);
                 if(wordCnt >=length){
-                    printQ(q);
-                    cout << endl;
-                    //putQueueInToVec(q, v);
+                    //printQ(q);
+                    string chunk = qToString(q);
+                    v.emplace_back(chunk);
                     q.pop();
                 }
                 word = "";
@@ -131,7 +132,7 @@ int main(int argc, char *argv[]) {
     cout << filePath;
     cout << endl;
     vector<string> v = returnSequences(filePath, 6);
-    //printV(v);
+    printV(v);
 
     hashNode(0, "test", hashTable);
     hashNode(0, "next1", hashTable);
