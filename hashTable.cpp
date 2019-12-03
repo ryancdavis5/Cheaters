@@ -16,9 +16,9 @@ hashNode::hashNode(){
 
 
 
-hashNode::hashNode(int key, string filename, hashNode *hashTable[]){
-    this->hash = key;
-    this->fileName = filename;
+hashNode::hashNode(long long key, string filename, hashNode *hashTable[]){
+    hash = key;
+    fileName = filename;
     //this->nWordSequence = entry;
 
     if(hashTable[key] != NULL){
@@ -36,7 +36,7 @@ void hashNode::setFile(string filename) {
     fileName = filename;
 }
 
-void hashNode::setKey(int key) {
+void hashNode::setKey(long long key) {
     hash = key;
 }
 
@@ -57,7 +57,7 @@ string hashNode::getNWordSequence(){
 }
  */
 
-int hashNode::getHash() {
+long long hashNode::getHash() {
     return hashNode::hash;
 }
 

@@ -9,7 +9,7 @@ using namespace std;
 
 class hashNode{
 private:
-    int hash;
+    long long hash;
     string fileName;
     //string nWordSequence;
 
@@ -23,13 +23,13 @@ public:
 
 
     hashNode();
-    hashNode(int hash, string fileName, hashNode *hashTable[]);
-    void setKey(int key);
+    hashNode(long long hash, string fileName, hashNode *hashTable[]);
+    void setKey(long long key);
     void setFile(string filename);
     //void setSequence(string sequence);
 
 
-    int getHash();
+    long long getHash();
     string getFileName();
     //string getNWordSequence();
 

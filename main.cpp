@@ -9,7 +9,7 @@
 #include <sstream>
 #include "hashTable.h"
 
-#define tableSize 10^9 + 9
+#define tableSize 10000000 + 9
 hashNode *hashTable[tableSize];
 
 
@@ -93,25 +93,27 @@ vector<string> returnSequences(string &filePath, int length){
     }
 }
 
-int hashValue(string sequence){
+long long hashValue(string sequence){
     const int p = 31;
-    int m = tableSize;
+    long long m = tableSize;
 
-    int hashVal = 0;
-    //int power = 1;
+    long long hashVal = 0;
+    long long power = 1;
     for(int i = 0; i < sequence.length(); i++){
-        hashVal = (hashVal + ((sequence[i] - 'A' + 1) ^ i));
-        //power = (power*p) % tableSize;
+        //int test = sequence[i];
+
+        hashVal = (hashVal + (sequence[i] - 'A' + 1) * power) % tableSize;
+        power = (power*p) % tableSize;
 
     } //edit with hash value
-    hashVal %= tableSize;
+    cout << hashVal << endl;
     return hashVal;
 }
 
 void hashString(string sequence, string fileName){
-    int hashVal = hashValue(sequence);
+    long long hashVal = hashValue(sequence);
 
-    hashNode nodeEntry = hashNode(hashVal, fileName, sequence, hashTable);
+    hashNode(hashVal, fileName, hashTable);
 
 }
 
@@ -131,9 +133,33 @@ int main(int argc, char *argv[]) {
     ss >> filePath;
     cout << filePath;
     cout << endl;
-    vector<string> v = returnSequences(filePath, 6);
-    printV(v);
+    //vector<string> v = returnSequences(filePath, 6);
+    //printV(v);
+    getDir(dir,files);
 
+    for (unsigned int i = 0;i < 3; i++) {
+        stringstream sss;
+        sss << "sm_doc_set/" << files[i];
+        string filePaths;
+        sss >> filePath;
+        //cout << filePath << endl;
+        vector<string> chunks = returnSequences(filePath, 6);
+
+        for(int j = 0; j < chunks.size(); j++){
+            hashString(chunks[j], filePath);
+            long testHash = hashValue(chunks[j]);
+            cout << chunks[j] << endl;
+            cout << hashTable[testHash]->getHash() << " this should be equal to number above" << endl;
+        }
+
+
+    }
+
+
+
+
+
+    /*
     hashNode(0, "test", hashTable);
     hashNode(0, "next1", hashTable);
     hashNode(0, "next2", hashTable);
@@ -142,6 +168,7 @@ int main(int argc, char *argv[]) {
     cout << hashTable[0]->getFileName() << endl;
     cout << hashTable[0]->next->getFileName() << endl;
     cout << hashTable[0]->next->next->getFileName() << endl;
+     */
 
 
 
