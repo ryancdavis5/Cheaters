@@ -9,7 +9,8 @@
 #include <sstream>
 #include "hashTable.h"
 
-hashNode *hashTable[100000];
+#define tableSize 10^9 + 9
+hashNode *hashTable[tableSize];
 
 
 
@@ -92,15 +93,24 @@ vector<string> returnSequences(string &filePath, int length){
 }
 
 int hashValue(string sequence){
-    int hash = 0; //edit with hash value
-    return hash;
+    const int p = 31;
+    int m = tableSize;
+
+    int hashVal = 0;
+    //int power = 1;
+    for(int i = 0; i < sequence.length(); i++){
+        hashVal = (hashVal + ((sequence[i] - 'A' + 1) ^ i));
+        //power = (power*p) % tableSize;
+
+    } //edit with hash value
+    hashVal %= tableSize;
+    return hashVal;
 }
 
 void hashString(string sequence, string fileName){
-    //int hashVal = hashValue(sequence);
+    int hashVal = hashValue(sequence);
 
     hashNode nodeEntry = hashNode(hashVal, fileName, sequence, hashTable);
-
 
 }
 
