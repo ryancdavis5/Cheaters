@@ -106,54 +106,121 @@ long long hashValue(string sequence){
         power = (power*p) % tableSize;
 
     } //edit with hash value
-    cout << hashVal << endl;
+    //cout << hashVal << endl;
     return hashVal;
 }
 
-void hashString(string sequence, string fileName){
+void hashString(string sequence, string fileName, int index){
     long long hashVal = hashValue(sequence);
 
-    hashNode *n = new hashNode(hashVal, fileName, hashTable);
+    hashNode *n = new hashNode(hashVal, index, fileName, hashTable);
 
 }
 
 
+
 int main(int argc, char *argv[]) {
+    int length = 6;
     std::cout << "cheaters!" << std::endl;
     // must change to use program args at some point
     string dir = string("sm_doc_set");
     vector<string> files = vector<string>();
+
     getDir(dir,files);
+    int numFiles = files.size() - 2;
+    cout << numFiles << endl;
+
+    /*
     for (unsigned int i = 0;i < files.size();i++) {
         cout << i <<": " << files[i] << endl;
     }
+     */
     stringstream ss;
-    ss << "sm_doc_set/" << files[2];
+    //ss << "sm_doc_set/" << files[2];
     string filePath;
     ss >> filePath;
     cout << filePath;
     cout << endl;
     //vector<string> v = returnSequences(filePath, 6);
     //printV(v);
-    getDir(dir,files);
+    //getDir(dir,files);
+    vector <string> fileNames;
 
-    for (unsigned int i = 0;i < files.size(); i++) {
+    int collisionTable[numFiles][numFiles];
+
+    for(int i = 0; i < numFiles; i++) {
+        for (int j = 0; j < numFiles; j++) {
+            collisionTable[i][j] = 0;
+        }
+    }
+
+
+    for (unsigned int i = 2; i < files.size(); i++) {
+        int index = i - 2;
         stringstream sss;
         sss << "sm_doc_set/" << files[i];
         string filePaths;
         sss >> filePath;
+
+        cout << index << ":" << filePath << endl;
+        fileNames.push_back(filePath);
         //cout << filePath << endl;
-        vector<string> chunks = returnSequences(filePath, 6);
+        vector<string> chunks = returnSequences(filePath, length);
 
         for(int j = 0; j < chunks.size(); j++){
-            hashString(chunks[j], filePath);
-            long long testHash = hashValue(chunks[j]);
-            cout << hashTable[testHash]->hash << " this should be hash" << endl;
-            cout << hashTable[testHash]->getFileName() << " this should be file" << endl;
+            hashString(chunks[j], filePath, index);
+            //long long testHash = hashValue(chunks[j]);
+            //cout << hashTable[testHash]->getHash() << " this should be hash" << endl;
+            //cout << hashTable[testHash]->index << endl;
+            //cout << hashTable[testHash]->getFileName() << " this should be file" << endl;
         }
 
 
+
+
     }
+
+
+    // below for loop is used for calculating amount of collisions for files (does not work)
+
+    for(int i = 0; i < fileNames.size(); i++){
+        vector <string> chunks = returnSequences(fileNames[i], length);
+
+        for(int j = 0; j < chunks.size(); j++){
+            long long hashCheck = hashValue(chunks[j]);
+            if(hashTable[hashCheck]->next != NULL){
+                hashNode *tempPtr = hashTable[hashCheck]->next;
+                hashNode *prvPtr = hashTable[hashCheck];
+                int index1 = i;
+                int index2 = prvPtr->index;
+                collisionTable[index1][index2] += 1;
+                while(tempPtr->next != NULL){
+                    prvPtr = tempPtr;
+                    tempPtr = tempPtr->next;
+                    index1 = i;
+                    index2 = prvPtr->index;
+                    collisionTable[index1][index2] += 1;
+
+                }
+
+                prvPtr->next = NULL;
+                free(tempPtr);
+
+            }
+        }
+
+    }
+
+
+    for(int i = 0; i < fileNames.size(); i++){
+        for(int j = 0; j <fileNames.size(); j++){
+            cout << "i: " << i << " j: " << j << endl;
+            cout << collisionTable[i][j] << endl;
+        }
+    }
+
+
+
 
 
 

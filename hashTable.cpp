@@ -19,10 +19,9 @@ hashNode::hashNode(){
 
 
 
-hashNode::hashNode(long long key, string filename, hashNode *hashTable[]){
+hashNode::hashNode(long long key, int newIndex, string filename, hashNode *hashTable[]){
     hash = key;
-    //cout << hash << endl;
-
+    index = newIndex;
     fileName = filename;
     //this->nWordSequence = entry;
 
@@ -66,6 +65,9 @@ long long hashNode::getHash() {
     return hashNode::hash;
 }
 
+void hashNode::setIndex(int newIndex) {
+    index = newIndex;
+}
 
 
 

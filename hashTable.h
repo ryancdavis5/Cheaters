@@ -11,20 +11,22 @@ class hashNode{
 private:
 
     string fileName;
+    long long hash;
     //string nWordSequence;
 
 
 
 
 public:
-    long long hash;
+
+    int index;
 
     hashNode *next;
 
 
 
     hashNode();
-    hashNode(long long hash, string fileName, hashNode *hashTable[]);
+    hashNode(long long hash, int newIndex, string fileName, hashNode *hashTable[]);
     void setKey(long long key);
     void setFile(string filename);
     //void setSequence(string sequence);
@@ -35,7 +37,7 @@ public:
     //string getNWordSequence();
 
     //void setNext(hashNode &sameKey);
-
+    void setIndex(int newIndex);
 
 };
 
