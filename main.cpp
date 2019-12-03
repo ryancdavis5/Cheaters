@@ -91,6 +91,14 @@ vector<string> returnSequences(string &filePath, int length){
     }
 }
 
+void hashString(string sequence, string fileName){
+    //int hashVal = hashValue(sequence);
+
+    hashNode nodeEntry = hashNode(hashVal, fileName, sequence, hashTable);
+
+
+}
+
 
 int main(int argc, char *argv[]) {
     std::cout << "cheaters!" << std::endl;
