@@ -269,15 +269,23 @@ int main(int argc, char *argv[]) {
     }
 
     //sorting the vector
-    /*
     bool sorted = false;
     while(sorted != true){
-        for(int i = 0; i < collisionList.size(); i++){
-            if(v[])
+        sorted = true;
+        for(unsigned int i = 0; i < collisionList.size()-1; i++){
+            if(collisionList[i].collisions < collisionList[i+1].collisions){
+                sorted = false;
+                collisionPair holder = collisionList[i];
+                collisionList[i] = collisionList[i+1];
+                collisionList[i+1] = holder;
+            }
         }
     }
-    */
 
+    cout << "list should be sorted" << endl;
+    for(int i = 0; i < collisionList.size(); i++){
+        cout << collisionList[i].collisions << endl;
+    }
 
 
 
