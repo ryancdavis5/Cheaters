@@ -17,6 +17,12 @@ hashNode *hashTable[tableSize];
 
 using namespace std;
 
+typedef struct collisionPair{
+    string fileName1;
+    string fileName2;
+    int collisions;
+}collisionPair;
+
 int getDir(string dir, vector<string> &files){
     DIR *dp;
     struct dirent *dirp;
@@ -209,6 +215,7 @@ int main(int argc, char *argv[]) {
 
     }
 
+    /*
 
     for(int i = 0; i < fileNames.size(); i++){
         for(int j = 0; j <fileNames.size(); j++){
@@ -216,6 +223,10 @@ int main(int argc, char *argv[]) {
         }
         cout << endl;
     }
+     */
+
+
+    /*
     vector <string> chunkTest = returnSequences(fileNames[0], length);
     vector <string> chunkChecker = returnSequences(fileNames[11], length);
     int bruteCounter = 0;
@@ -233,7 +244,39 @@ int main(int argc, char *argv[]) {
     }
 
     cout << bruteCounter << endl;
+     */
 
+
+
+    vector <collisionPair> collisionList;
+    for (int i = 0; i < fileNames.size(); ++i) {
+
+        for(int j = i + 1; j < fileNames.size(); j++){
+            if(collisionTable[i][j] >= 200) {
+                collisionPair newPair;
+                newPair.collisions = collisionTable[i][j];
+                newPair.fileName1 = fileNames[i];
+                newPair.fileName2 = fileNames[j];
+                collisionList.push_back(newPair);
+                //cout << collisionTable[i][j] << ": " << fileNames[i] << ", " << fileNames[j] << endl;
+            }
+
+        }
+    }
+
+    for(int i = 0; i < collisionList.size(); i++){
+        cout << collisionList[i].collisions << endl;
+    }
+
+    //sorting the vector
+    /*
+    bool sorted = false;
+    while(sorted != true){
+        for(int i = 0; i < collisionList.size(); i++){
+            if(v[])
+        }
+    }
+    */
 
 
 
