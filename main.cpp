@@ -126,15 +126,19 @@ void hashString(string sequence, string fileName, int index){
 
 
 int main(int argc, char *argv[]) {
-    int length = 6;
+    int length = atoi(argv[2]);
+    int minNumCollisions = atoi(argv[3]);
+    if(length > 300){ //crashes at 316 but not 315
+        cout << "error: number too large" <<endl;
+        return 0;
+    }
     std::cout << "cheaters!" << std::endl;
     // must change to use program args at some point
-    string dir = string("sm_doc_set");
+    string dir = string(argv[1]);
     vector<string> files = vector<string>();
-
     getDir(dir,files);
-    int numFiles = files.size() - 2;
-    cout << numFiles << endl;
+    int numFiles = files.size();
+    cout << "number of files:" << numFiles << endl;
 
     /*
     for (unsigned int i = 0;i < files.size();i++) {
@@ -142,18 +146,16 @@ int main(int argc, char *argv[]) {
     }
      */
     stringstream ss;
-    //ss << "sm_doc_set/" << files[2];
     string filePath;
     ss >> filePath;
     cout << filePath;
     cout << endl;
-    //vector<string> v = returnSequences(filePath, 6);
-    //printV(v);
-    //getDir(dir,files);
     vector <string> fileNames;
-
-    int collisionTable[numFiles][numFiles];
-
+    //dynamically allocate collision Table
+    int** collisionTable = new int*[numFiles];
+    for(int i = 0; i < numFiles; ++i){
+        collisionTable[i] = new int[numFiles];
+    }
     for(int i = 0; i < numFiles; i++) {
         for (int j = 0; j < numFiles; j++) {
             collisionTable[i][j] = 0;
@@ -164,11 +166,11 @@ int main(int argc, char *argv[]) {
     for (unsigned int i = 2; i < files.size(); i++) {
         int index = i - 2;
         stringstream sss;
-        sss << "sm_doc_set/" << files[i];
+        sss << dir << "/" << files[i];
         string filePaths;
         sss >> filePath;
 
-        cout << index << ":" << filePath << endl;
+        //cout << index << ":" << filePath << endl;
         fileNames.push_back(filePath);
         //cout << filePath << endl;
         vector<string> chunks = returnSequences(filePath, length);
@@ -252,7 +254,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < fileNames.size(); ++i) {
 
         for(int j = i + 1; j < fileNames.size(); j++){
-            if(collisionTable[i][j] >= 200) {
+            if(collisionTable[i][j] >= minNumCollisions) {
                 collisionPair newPair;
                 newPair.collisions = collisionTable[i][j];
                 newPair.fileName1 = fileNames[i];
@@ -263,10 +265,7 @@ int main(int argc, char *argv[]) {
 
         }
     }
-
-    for(int i = 0; i < collisionList.size(); i++){
-        cout << collisionList[i].collisions << endl;
-    }
+    //now have unsoted vector of collisions
 
     //sorting the vector
     bool sorted = false;
@@ -282,9 +281,9 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    cout << "list should be sorted" << endl;
+    //cout << "list should be sorted" << endl;
     for(int i = 0; i < collisionList.size(); i++){
-        cout << collisionList[i].collisions << endl;
+        cout << collisionList[i].collisions << ": "<< collisionList[i].fileName1 << ", "<< collisionList[i].fileName2 << endl;
     }
 
 
